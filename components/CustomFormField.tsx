@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { E164Number } from "libphonenumber-js/core";
 import Image from "next/image";
-import DatePicker from "react-datepicker";
+import ReactDatePicker from "react-datepicker";
 import { Control } from "react-hook-form";
 import PhoneInput from "react-phone-number-input";
 
@@ -15,10 +15,10 @@ import {
 } from "./ui/form";
 import { Input } from "./ui/input";
 import { Select, SelectContent, SelectTrigger, SelectValue } from "./ui/select";
-import { Textarea } from "./ui/textarea"
+import { Textarea } from "./ui/textarea";
 
 export enum FormFieldType {
-  INPUT = "input", 
+  INPUT = "input",
   TEXTAREA = "textarea",
   PHONE_INPUT = "phoneInput",
   CHECKBOX = "checkbox",
@@ -43,7 +43,6 @@ interface CustomProps {
 }
 
 const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
-
   switch (props.fieldType) {
     case FormFieldType.INPUT:
       return (
@@ -66,6 +65,7 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
           </FormControl>
         </div>
       );
+
     case FormFieldType.TEXTAREA:
       return (
         <FormControl>
@@ -82,7 +82,7 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
       return (
         <FormControl>
           <PhoneInput
-            defaultCountry="IN"
+            defaultCountry="US"
             placeholder={props.placeholder}
             international
             withCountryCallingCode
@@ -92,8 +92,8 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
           />
         </FormControl>
       );
-    
-      case FormFieldType.CHECKBOX:
+
+    case FormFieldType.CHECKBOX:
       return (
         <FormControl>
           <div className="flex items-center gap-4">
@@ -116,14 +116,14 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
             src="/assets/icons/calendar.svg"
             height={24}
             width={24}
-            alt="calender"
+            alt="user"
             className="ml-2"
           />
           <FormControl>
-            <DatePicker
+            <ReactDatePicker
               showTimeSelect={props.showTimeSelect ?? false}
               selected={field.value}
-              onChange={(date) => field.onChange(date)}
+              onChange={(date: Date) => field.onChange(date)}
               timeInputLabel="Time:"
               dateFormat={props.dateFormat ?? "MM/dd/yyyy"}
               wrapperClassName="date-picker"
@@ -131,7 +131,7 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
           </FormControl>
         </div>
       );
-      
+
     case FormFieldType.SELECT:
       return (
         <FormControl>

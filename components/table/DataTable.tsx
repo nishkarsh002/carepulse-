@@ -96,14 +96,12 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
-
-
-      <div className="table-actions"> 
+      <div className="table-actions">
         <Button
           variant="outline"
           size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
           className="shad-gray-btn"
         >
           <Image

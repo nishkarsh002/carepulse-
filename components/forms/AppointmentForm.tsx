@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
 import { SelectItem } from "@/components/ui/select";
 import { Doctors } from "@/constants";
 import {
@@ -20,6 +21,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
 import { Form } from "../ui/form";
+import { time } from "console";
 
 export const AppointmentForm = ({
   userId,
@@ -92,6 +94,7 @@ export const AppointmentForm = ({
       } else {
         const appointmentToUpdate = {
           userId,
+          timeZone: "UTC",
           appointmentId: appointment?.$id!,
           appointment: {
             primaryPhysician: values.primaryPhysician,
@@ -209,12 +212,10 @@ export const AppointmentForm = ({
 
         <SubmitButton
           isLoading={isLoading}
-          className={`${type === "cancel" ? "shad-danger-btn" : "shad-primary-btn"} w-full`} 
+          className={`${type === "cancel" ? "shad-danger-btn" : "shad-primary-btn"} w-full`}
         >
-          
           {buttonLabel}
         </SubmitButton>
-
       </form>
     </Form>
   );
